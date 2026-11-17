@@ -5,6 +5,7 @@ use App\Http\Controllers\OfferController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('api')->group(function () {
+    Route::get('/csrf-cookie', fn () => response()->noContent()); 
     Route::post('/offers', [OfferController::class, 'store']);
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/me', [AuthController::class, 'me']);
