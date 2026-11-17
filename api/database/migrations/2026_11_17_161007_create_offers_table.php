@@ -11,10 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('offers', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+    Schema::create('offers', function (Blueprint $table) {
+        $table->id();
+        $table->string('company_name');
+        $table->string('contact_name');
+        $table->string('email');
+        $table->string('phone', 30);
+        $table->decimal('amount', 14, 2);
+        $table->text('description')->nullable();
+        $table->timestamps();
+    });
     }
 
     /**
