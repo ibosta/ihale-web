@@ -1,3 +1,4 @@
+import OffersTable from '../components/OffersTable';
 import { useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Container, Paper, Title, Stack, TextInput, PasswordInput, Button, Text, Loader } from '@mantine/core';
@@ -54,7 +55,8 @@ export default function Admin() {
   return (
     <Container py="xl">
       <Title order={2}>Hoş geldin, {me.data.name}</Title>
-      <Button mt="md" variant="light" onClick={logout}>Çıkış yap</Button>
+      <Button my="md" variant="light" onClick={logout}>Çıkış yap</Button>
+      <OffersTable />
     </Container>
   );
 }
