@@ -1,4 +1,4 @@
-import OffersTable from '../components/OffersTable';
+import OffersTable from '../components/OfferTable';
 import { useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Container, Paper, Title, Stack, TextInput, PasswordInput, Button, Text, Loader } from '@mantine/core';
