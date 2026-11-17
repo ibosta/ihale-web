@@ -16,8 +16,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
     \App\Models\User::updateOrCreate(
-        ['email' => env('ADMIN_EMAIL')],
-        ['name' => 'Yönetici', 'password' => env('ADMIN_PASSWORD')]
+        ['email' => config('app.admin_email')],
+        ['name' => 'Yönetici', 'password' => config('app.admin_password')]
     );
     }
 }
