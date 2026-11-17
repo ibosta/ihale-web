@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Container, Paper, Title, Stack, TextInput, Textarea, Button } from '@mantine/core';
+import { notifications } from '@mantine/notifications';
 import api from '../api';
 
 export default function OfferForm() {
@@ -7,6 +8,7 @@ export default function OfferForm() {
     company_name: '', contact_name: '', email: '', phone: '', amount: '', description: '',
   });
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   function change(e) {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -15,13 +17,19 @@ export default function OfferForm() {
   async function handleSubmit(e) {
     e.preventDefault();
     setErrors({});
+    setLoading(true);
     try {
       await api.post('/offers', values);
-      alert('Gönderildi');
+      notifications.show({ color: 'green', message: 'Teklifiniz alındı, teşekkürler.' });
+      setValues({ company_name: '', contact_name: '', email: '', phone: '', amount: '', description: '' });
     } catch (err) {
       if (err.response?.status === 422) {
         setErrors(err.response.data.errors);
+      } else {
+        notifications.show({ color: 'red', message: 'Bir hata oluştu, tekrar deneyin.' });
       }
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -43,7 +51,7 @@ export default function OfferForm() {
               error={errors.amount?.[0]} />
             <Textarea label="Açıklama" name="description" value={values.description} onChange={change}
               error={errors.description?.[0]} />
-            <Button type="submit" fullWidth>Gönder</Button>
+            <Button type="submit" fullWidth loading={loading}>Gönder</Button>
           </Stack>
         </form>
       </Paper>
